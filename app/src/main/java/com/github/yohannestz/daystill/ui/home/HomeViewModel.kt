@@ -5,9 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.github.yohannestz.daystill.data.repository.ReminderRepository
 import com.github.yohannestz.daystill.data.repository.ThemeRepository
 import com.github.yohannestz.daystill.ui.base.ThemeStyle
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -18,16 +21,34 @@ class HomeViewModel(
 
     private val _state = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState> = _state.asStateFlow()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), HomeState())
 
     private val _currentTheme = MutableStateFlow(ThemeStyle.FOLLOW_SYSTEM)
     val currentTheme: StateFlow<ThemeStyle> = _currentTheme.asStateFlow()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ThemeStyle.FOLLOW_SYSTEM)
 
     init {
-        loadReminders()
-        loadCurrentTheme()
-    }
+        viewModelScope.launch {
+            transformState {
+                isLoading = true
+                error = null
+            }
 
-    private fun loadCurrentTheme() {
+            try {
+                repository.getAllReminders().collect { fetchedReminders ->
+                    transformState {
+                        reminders = fetchedReminders
+                        isLoading = false
+                    }
+                }
+            } catch (ex: Exception) {
+                transformState {
+                    error = ex.message
+                    isLoading = false
+                }
+            }
+        }
+
         viewModelScope.launch {
             themeRepository.currentTheme.collect { theme ->
                 _currentTheme.value = theme
@@ -51,6 +72,7 @@ class HomeViewModel(
             }
 
             try {
+                delay(500)
                 repository.getAllReminders().collect { fetchedReminders ->
                     transformState {
                         reminders = fetchedReminders
@@ -94,7 +116,6 @@ class HomeViewModel(
 
                     try {
                         repository.deleteReminder(event.reminder.id)
-                        loadReminders()
                     } catch (ex: Exception) {
                         transformState {
                             error = ex.message

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Info
@@ -22,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +54,9 @@ fun HomeView(
     var showDeleteDialog by remember { mutableStateOf(false) }
     var reminderToDelete by remember { mutableStateOf<Reminder?>(null) }
 
+    val lazyListState = rememberLazyListState()
+    val isFabExtended = remember { derivedStateOf { lazyListState.firstVisibleItemIndex == 0 } }
+
     val themeStyle = viewModel.currentTheme.collectAsStateWithLifecycle()
 
     ScaffoldWithTopAppBarNavIcon(
@@ -61,7 +66,8 @@ fun HomeView(
                     navActionManager.navigateTo(Surface.AddReminderView.value)
                 },
                 icon = { Icon(Icons.Filled.Add, null) },
-                text = { Text(text = stringResource(id = R.string.add_reminder)) }
+                text = { Text(text = stringResource(id = R.string.add_reminder)) },
+                expanded = isFabExtended.value
             )
         },
         title = stringResource(R.string.home_title),
@@ -123,7 +129,8 @@ fun HomeView(
                     }
                 } else {
                     LazyColumn(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        state = lazyListState
                     ) {
                         items(state.reminders) { reminder ->
                             ReminderCard(

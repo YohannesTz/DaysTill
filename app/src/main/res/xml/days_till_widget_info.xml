@@ -3,7 +3,6 @@
     android:initialLayout="@layout/glance_default_loading_layout"
     android:minWidth="300dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/ic_launcher_background"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="10000"
-    android:widgetCategory="home_screen" />
+    android:widgetCategory="home_screen"
+    android:previewImage="@drawable/widget_preview"/>

@@ -17,4 +17,7 @@
     <string name="confirm_delete_message">Are you sure you want to delete this item?</string>
     <string name="yes">Yes</string>
     <string name="nothing_today">Nothing Today</string>
+    <string name="world_turtle_day">World Turtle Day</string>
+    <string name="sample_description">Organize a turtle-themed party with friends and family</string>
+    <string name="sample_remaining_text">9 Days remaining</string>
 </resources>

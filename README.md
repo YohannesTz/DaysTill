@@ -1,6 +1,6 @@
 # Reminder App
 
-This is a simple reminder app that allows users to create and display reminders directly on their home screen using a widget. The reminders are persistent and can be updated periodically through background tasks. Built with a modern Android development stack, the app follows the MVVM (Model-View-ViewModel) architecture, ensuring a clean separation of concerns and easy maintenance.
+A simple reminder app that allows users to create and display reminders directly on their home screen using a widget.
 
 ## Features
 - **Home Screen Widget**: Display your reminders directly on the home screen for quick access.
@@ -17,7 +17,6 @@ This is a simple reminder app that allows users to create and display reminders 
 
 ## Screenshots
 
-| Preview 1 | Preview 2 | Preview 3 | Preview 4 |
 |-----------|-----------|-----------|-----------|
 | ![Preview 0](./preview/preview_0.png) | ![Preview 1](./preview/preview_1.png) | ![Preview 2](./preview/preview_2.png) | ![Preview 3](./preview/preview_3.png) |
 

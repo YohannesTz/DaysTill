@@ -17,6 +17,7 @@ A simple reminder app that allows users to create and display reminders directly
 
 ## Screenshots
 
+|  |  |  |  |
 |-----------|-----------|-----------|-----------|
 | ![Preview 0](./preview/preview_0.png) | ![Preview 1](./preview/preview_1.png) | ![Preview 2](./preview/preview_2.png) | ![Preview 3](./preview/preview_3.png) |
 

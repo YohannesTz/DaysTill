@@ -1,4 +1,4 @@
-# Reminder App
+# DaysTill
 
 A simple reminder app that allows users to create and display reminders directly on their home screen using a widget.
 

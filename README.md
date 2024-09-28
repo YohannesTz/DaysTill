@@ -2,6 +2,9 @@
 
 A simple reminder app that allows users to create and display reminders directly on their home screen using a widget.
 
+# Download
+you can download the latest binary from [here](https://github.com/YohannesTz/DaysTill/releases/) or just download it [here](https://github.com/YohannesTz/DaysTill/releases/download/1.0/app-release-unsigned.apk)
+
 ## Features
 - **Home Screen Widget**: Display your reminders directly on the home screen for quick access.
 - **Background Syncing**: Periodically updates the reminder text using WorkManager.

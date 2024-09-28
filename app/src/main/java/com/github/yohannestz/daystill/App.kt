@@ -1,4 +1,4 @@
-package com.github.yohannestz.daystill.ui
+package com.github.yohannestz.daystill
 
 import android.app.Application
 import androidx.work.ExistingPeriodicWorkPolicy
